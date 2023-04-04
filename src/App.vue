@@ -3,7 +3,7 @@
   <div class="main-div">
     <div id="iteration-2">
       <h2> · ITERATION 2 ·</h2>
-      <div class="border-div">
+      <div class="border-div" :class="{ active: activebtn }">
         <p class="p-instructions">Display the result of a JavaScript operation in a component's HTML</p>
         <p><strong>First</strong>, you just need to insert a mathematical operation inside your HTML and see what
           happens.
@@ -14,7 +14,8 @@
         <p><strong>Then</strong>, the real challenge begins: you have to "print" a string on your template, with a twist:
           this string has
           to be returned by a function and read the data stored in other reactive variables</p>
-        <p>{{ filmsLenght }}</p>
+
+        <p><span>{{ getTitle }}</span> --This is the titles of Iteration 4</p>
       </div>
       <div id="iteration-3">
         <h2>· ITERATION 3 ·</h2>
@@ -27,7 +28,8 @@
           <div v-show="show" id="iteration-4">
             <h2>· ITERATION 4 ·</h2>
             <div class="border-div">
-              <IterarionFour v-for="film in films" :key="film.index" />
+              <IterarionFour v-for="film in films" :key="film.index" :title="film.title" :description="film.description"
+                :content="film.content" />
             </div>
           </div>
         </div>
@@ -35,7 +37,7 @@
       <div id="iteration-5">
         <h2>· ITERATION 5 ·</h2>
         <div class="border-div">
-          <button @click="activebtn = !activebtn">¡Change background color!</button>
+          <button>¡Change Iteration 2 background color!</button>
         </div>
       </div>
 
@@ -49,7 +51,8 @@
 import NavBar from './components/NavBar.vue'
 import FooterComp from './components/FooterComp.vue'
 import IterarionFour from './components/IterationFour.vue'
-import { reactive } from "vue";
+import { reactive, ref, computed } from "vue";
+
 
 const show = ref(false);
 const activebtn = ref(false);
@@ -75,6 +78,17 @@ const films = reactive([
     content: "Eleven jurors are convinced that the defendant is guilty of murder. The twelfth has no doubt of his innocence. How can this one man steer the others toward the same conclusion?",
   },])
 
+
+const getTitle = computed(() => {
+  const titles = [];
+  for (let i = 0; i < films.length; i++) {
+    titles.push(films[i].title);
+  }
+
+  return titles;
+},)
+
+console.log(getTitle)
 </script>
 
 <style scoped>

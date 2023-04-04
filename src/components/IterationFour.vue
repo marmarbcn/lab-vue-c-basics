@@ -3,7 +3,6 @@
     <p class="p-instructions">Display a list of elements that are stored inside a component:</p>
     </p>
     <div id="films">
-
         <ul>
             <li><span>Title: </span>{{ title }}</li>
             <li><span>Director: </span>{{ description }}</li>
@@ -15,7 +14,7 @@
 <script setup>
 
 
-defineProps(['title', 'description', 'content']);
+const props = defineProps(['title', 'description', 'content']);
 
 </script>
 <style scoped>
